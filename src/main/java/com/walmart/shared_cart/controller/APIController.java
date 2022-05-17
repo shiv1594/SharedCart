@@ -1,11 +1,9 @@
 package com.walmart.shared_cart.controller;
 
 import com.walmart.shared_cart.model.SharedCart;
+import com.walmart.shared_cart.service.UrlGenerationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import com.walmart.shared_cart.service.UrlGenerationService;
-
-
 
 @RequestMapping("/")
 @RestController
