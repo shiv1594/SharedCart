@@ -1,13 +1,16 @@
-package com.walmart.shared_cart;
+package com.walmart.shared_cart.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.walmart.shared_cart.model.SharedCart;
+import com.walmart.shared_cart.service.UrlGenerationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/")
 @RestController
 public class APIController {
+
+    @Autowired
+    UrlGenerationService urlGenerationService;
 
     @GetMapping("/aboutSharedCart")
     public void aboutSharedCart() {
@@ -20,8 +23,13 @@ public class APIController {
     }
 
     @PostMapping("/createSharedCart")
-    public void createSharedCart() {
-        // logic
+    public String createSharedCart() {
+        return urlGenerationService.generateUniqueUrl();
+    }
+
+    @GetMapping("/getSharedCart")
+    public SharedCart getSharedCart(@RequestParam String url) {
+        return urlGenerationService.getSharedCart(url);
     }
 
     @GetMapping("/getItemDetailsByUserIdAndCartId")
