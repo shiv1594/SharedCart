@@ -1,16 +1,13 @@
 package com.walmart.shared_cart.controller;
 
-import com.walmart.shared_cart.model.SharedCart;
-import com.walmart.shared_cart.service.UrlGenerationService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RequestMapping("/")
 @RestController
 public class APIController {
-
-    @Autowired
-    UrlGenerationService urlGenerationService;
 
     @GetMapping("/aboutSharedCart")
     public void aboutSharedCart() {
@@ -20,16 +17,6 @@ public class APIController {
     @GetMapping("/getAddressbyUserID")
     public void getAddressbyUserID() {
         // logic
-    }
-
-    @PostMapping("/createSharedCart")
-    public String createSharedCart() {
-        return urlGenerationService.generateUniqueUrl();
-    }
-
-    @GetMapping("/getSharedCart")
-    public SharedCart getSharedCart(@RequestParam String url) {
-        return urlGenerationService.getSharedCart(url);
     }
 
     @GetMapping("/getItemDetailsByUserIdAndCartId")
@@ -58,22 +45,22 @@ public class APIController {
     }
 
     @PostMapping("/placeOrder")
-    public  void placeOrder() {
+    public void placeOrder() {
         // logic
     }
 
     @PostMapping("/addToFavorite")
-    public  void addToFavorite() {
+    public void addToFavorite() {
         // logic
     }
 
     @PostMapping("/deleteCart")
-    public  void deleteCart() {
+    public void deleteCart() {
         // logic
     }
 
     @PostMapping("/updateEndDateOfCart")
-    public  void updateEndDateOfCart() {
+    public void updateEndDateOfCart() {
         // logic
     }
 
