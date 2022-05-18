@@ -70,4 +70,22 @@ public class SharedCartController {
         return sharedCartService.addItem(cartUrl, item);
     }
 
+    @DeleteMapping("/{cartUrl}/{userId}/delete")
+    public SharedCart deleteUserFromCart(@PathVariable String cartUrl, @PathVariable Long userId) {
+        User user = userService.getUser(userId);
+        if (user == null) {
+            return sharedCartService.getSharedCartDetails(cartUrl);
+        }
+        return sharedCartService.deleteUser(cartUrl, user);
+    }
+
+    @DeleteMapping("/{cartUrl}/delete")
+    public SharedCart deleteUserFromCart(@PathVariable String cartUrl, @RequestParam int itemId) {
+        Item item = itemService.getItemById(itemId);
+        if (item == null) {
+            return sharedCartService.getSharedCartDetails(cartUrl);
+        }
+        return sharedCartService.deleteItem(cartUrl, item);
+    }
+
 }

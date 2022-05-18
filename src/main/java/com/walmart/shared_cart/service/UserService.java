@@ -24,4 +24,15 @@ public class UserService {
     public User addUser(User user) {
         return userRepo.addUser(user);
     }
+
+    public User deleteUser(long userId) {
+        User user = null;
+        try {
+            user = userRepo.getUserById(userId);
+            userRepo.deleteUser(userId);
+        } catch(Exception e) {
+            System.out.println("Failed to delete user" +e);
+        }
+        return user;
+    }
 }

@@ -19,4 +19,14 @@ public class ItemService {
     public Item getItemById(int id) {return itemsRepo.getItemById(id);}
 
     public Item addItem(Item item) {return itemsRepo.addItem(item);}
+
+    public Item deleteItem(int id) {
+        Item item = null;
+        try {
+          item = itemsRepo.deleteItem(id);
+        } catch (Exception e) {
+            System.out.println("Failed to delete item" +e);
+        }
+        return item;
+    }
 }

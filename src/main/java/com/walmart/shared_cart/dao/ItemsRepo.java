@@ -44,4 +44,15 @@ public class ItemsRepo {
         return itemMap.get(itemId);
     }
 
+    public Item deleteItem(int id) {
+        Item item;
+        if (!itemMap.containsKey(id)) {
+            throw new RuntimeException("Unable to find the item to be deleted");
+        }
+        item = itemMap.get(id);
+        itemMap.remove(id);
+        this.itemId--;
+        return item;
+    }
+
 }

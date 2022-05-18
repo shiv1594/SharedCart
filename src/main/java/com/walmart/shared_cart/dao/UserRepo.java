@@ -61,4 +61,15 @@ public class UserRepo {
         this.userMap.put(currUserId, user);
         return userMap.get(currUserId);
     }
+
+    public User deleteUser(long userId) {
+        User user;
+        if (!userMap.containsKey(userId)) {
+            throw new RuntimeException("Unable to find the user to be deleted");
+        }
+        user = userMap.get(userId);
+        userMap.remove(userId);
+        this.currUserId--;
+        return user;
+    }
 }

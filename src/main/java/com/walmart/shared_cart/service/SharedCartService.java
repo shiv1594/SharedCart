@@ -50,7 +50,7 @@ public class SharedCartService {
 
         if (sharedCart == null || sharedCart.getTotalMembers() >= 3) {
             System.out.println("Maximum allowed users for shared cart are 3");
-            return null;
+            return sharedCartRepo.addSharedCartDetails(cartUrl, sharedCart);
         }
 
         List<User> members = sharedCart.getCartMembers();
@@ -89,4 +89,42 @@ public class SharedCartService {
             return sharedCartRepo.addSharedCartDetails(cartUrl, sharedCart);
         }
     }
+
+    public SharedCart deleteUser(String cartUrl, User user) {
+        SharedCart sharedCart = getSharedCartDetails(cartUrl);
+
+        if (sharedCart == null) {
+            System.out.println("Shared Cart with id:" + cartUrl + "does not exist");
+            return sharedCartRepo.addSharedCartDetails(cartUrl, sharedCart);
+        }
+
+        List<User> members = sharedCart.getCartMembers();
+        if (members.stream().anyMatch(x -> x.getUserId() == user.getUserId())) {
+            sharedCart.getCartMembers().remove(user);
+        }
+        return sharedCartRepo.addSharedCartDetails(cartUrl, sharedCart);
+    }
+
+    public SharedCart deleteItem(String cartUrl, Item item) {
+        SharedCart sharedCart = getSharedCartDetails(cartUrl);
+
+        if (sharedCart == null) {
+            System.out.println("Failed to remove item from the shared cart");
+            return null;
+        }
+
+        List<Item> sharedCartItems = sharedCart.getSharedCartItems();
+        if (sharedCartItems.stream().anyMatch(x->(x.getId() == (item.getId())))) {
+            int count = item.getItemCount() - 1;
+            item.setItemCount(count);
+            double cartTotal = sharedCart.getCartTotal() - item.getPrice();
+            sharedCart.setCartTotal(cartTotal);
+            if (item.getItemCount() == 0) {
+                sharedCart.getSharedCartItems().remove(item);
+            }
+        }
+        return sharedCartRepo.addSharedCartDetails(cartUrl, sharedCart);
+    }
+
+
 }

@@ -22,4 +22,10 @@ public class ItemController {
     @PostMapping("/add")
     public Item addItems(@RequestBody Item item) {return itemService.addItem(item);}
 
+    @DeleteMapping("/delete/{id}")
+    public Item removeItem(@PathVariable int id) {
+        return itemService.deleteItem(id);
+    }
+
+
 }
