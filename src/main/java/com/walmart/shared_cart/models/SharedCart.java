@@ -16,6 +16,8 @@ public class SharedCart {
 
     private List<User> cartMembers;
 
+    private List<Item> sharedCartItems;
+
     private double cartTotal;
 
     private int zipcode;
