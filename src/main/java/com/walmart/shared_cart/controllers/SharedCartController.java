@@ -66,14 +66,6 @@ public class SharedCartController {
         return sharedCartService.addUser(cartUrl, user);
     }
 
-    @PostMapping("/{cartUrl}/add")
-    public SharedCart addItemToCart(@PathVariable String cartUrl, @RequestParam int itemId) {
-        Item item = itemService.getItemById(itemId);
-        if (item == null) {
-            return sharedCartService.getSharedCartDetails(cartUrl);
-        }
-        return sharedCartService.addItem(cartUrl, item);
-    }
 
     @DeleteMapping("/{cartUrl}/{userId}/delete")
     public SharedCart deleteUserFromCart(@PathVariable String cartUrl, @PathVariable Long userId) {
@@ -82,15 +74,6 @@ public class SharedCartController {
             return sharedCartService.getSharedCartDetails(cartUrl);
         }
         return sharedCartService.deleteUser(cartUrl, user);
-    }
-
-    @DeleteMapping("/{cartUrl}/delete")
-    public SharedCart deleteUserFromCart(@PathVariable String cartUrl, @RequestParam int itemId) {
-        Item item = itemService.getItemById(itemId);
-        if (item == null) {
-            return sharedCartService.getSharedCartDetails(cartUrl);
-        }
-        return sharedCartService.deleteItem(cartUrl, item);
     }
 
     @PostMapping("/{cartUrl}/{userId}/checkout")
@@ -103,6 +86,5 @@ public class SharedCartController {
         //This is enabled when all users have paid their dues for the individual orders. Any of the user can click on this and place the order.
         //This will call existing walmart API
     }
-
 
 }
