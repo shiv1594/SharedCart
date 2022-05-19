@@ -127,4 +127,8 @@ public class SharedCartService {
     }
 
 
+    public double getSharedCartTotal(String cartUrl) {
+        SharedCart sharedCart = sharedCartRepo.getById(cartUrl);
+        return sharedCart.getCartTotal();
+    }
 }

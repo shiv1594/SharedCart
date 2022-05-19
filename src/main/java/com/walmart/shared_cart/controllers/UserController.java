@@ -37,4 +37,14 @@ public class UserController {
 
     @DeleteMapping("/delete/{userId}")
     public User removeUser(@PathVariable int userId) { return userService.deleteUser(userId);}
+
+    @PostMapping("/{userId}/pay")
+    public void payBill(@PathVariable Long userId) {
+        //After checkout from sharedCart each user can pay their individual cart total. Existing walmart API is called
+    }
+
+    @GetMapping("/{orderId}/trackOrder")
+    public void getOrderStatus(@PathVariable String orderId) {
+        //After the order has been placed from shared cart each user can track their individual orders. Existing walmart API is called.
+    }
 }

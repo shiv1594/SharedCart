@@ -42,6 +42,11 @@ public class SharedCartController {
         return sharedCartService.getAllSharedCarts();
     }
 
+    @GetMapping("/{cartUrl}/total")
+    public double getSharedCartTotal(@PathVariable String cartUrl) {
+        return sharedCartService.getSharedCartTotal(cartUrl);
+    }
+
     @PostMapping("/{userId}/{itemId}/create")
     public String createSharedCart(@PathVariable Long userId, @PathVariable int itemId) {
         User user = userService.getUser(userId);
@@ -87,5 +92,17 @@ public class SharedCartController {
         }
         return sharedCartService.deleteItem(cartUrl, item);
     }
+
+    @PostMapping("/{cartUrl}/{userId}/checkout")
+    public void continueToCheckout(@PathVariable String cartUrl, @PathVariable Long userId) {
+        //This is invoked by current user after shared cart has been locked. This will call existing walmart API
+    }
+
+    @PostMapping("/{cartUrl}/placeOrder")
+    public void placeOrder(@PathVariable String cartUrl) {
+        //This is enabled when all users have paid their dues for the individual orders. Any of the user can click on this and place the order.
+        //This will call existing walmart API
+    }
+
 
 }
